@@ -46,16 +46,27 @@ class MainActivity : AppCompatActivity() {
         val C = c.text.toString().toDoubleOrNull()
         if (A != null && B != null && C != null) {
             if (A == 0.0) {
-                resultText.text = "А не должно равняться 0"
+                var variable = ""
+                if (B == 0.0) {
+                    if (C == 0.0) {
+                        variable = "x = ∞"
+
+                    } else {
+                        variable = "x = Ø"
+                    }
+                } else {
+                    variable = "x = "+ (-C/B)
+                }
+                resultText.text = variable
                 return
             }
             val D = discriminant(A, B, C)
             if (discriminant(A, B, C) < 0) {
-                resultText.text = "Дискриминант меньше 0 :("
+                resultText.text = "x = Ø"
                 return
             }
             if (D == 0.0) {
-                resultText.text = "x = " + rootZero(A, B)
+                resultText.text = "x1 = x2 = " + rootZero(A, B)
             } else {
                 resultText.text =
                     "x1 = " + rootPositive(A, B, C) + "\nx2 = " + rootNegative(A, B, C)
